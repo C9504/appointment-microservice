@@ -62,12 +62,12 @@ public class AppointmentResource {
     @Transactional
     public Appointment update(@PathParam("id") UUID id, Appointment appointment) {
         Appointment entity = Appointment.findById(id);
-        Barber barber = Barber.findById(appointment.getBarber().getId());
-        Customer customer = Customer.findById(appointment.getCustomer().getId());
+        Barber barber = entity.getBarber();
+        Customer customer = entity.getCustomer();
         if (entity != null) {
             entity.setBarber(barber);
             entity.setCustomer(customer);
-            entity.setDateTimeAppointment(appointment.getDateTimeAppointment());
+            entity.setDateTimeAppointment(entity.getDateTimeAppointment());
             entity.setState(appointment.getState());
             entity.setUpdatedAt(Instant.now().toEpochMilli());
             appointmentRepository.persist(entity);

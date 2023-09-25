@@ -6,6 +6,7 @@ import io.quarkus.hibernate.orm.panache.PanacheEntityBase;
 import jakarta.persistence.*;
 
 import java.time.Instant;
+import java.util.List;
 import java.util.Set;
 import java.util.UUID;
 
@@ -39,7 +40,7 @@ public class Customer extends PanacheEntityBase {
     @OneToMany(targetEntity = Appointment.class, mappedBy = "customer", fetch = FetchType.EAGER, cascade = CascadeType.ALL,
             orphanRemoval = true)
     @JsonBackReference("customerAppointmentPreference")
-    private Set<Appointment> appointments;
+    private List<Appointment> appointments;
 
     public Customer() {
     }
@@ -154,11 +155,11 @@ public class Customer extends PanacheEntityBase {
     }
 
 
-    public Set<Appointment> getAppointments() {
+    public List<Appointment> getAppointments() {
         return appointments;
     }
 
-    public void setAppointments(Set<Appointment> appointments) {
+    public void setAppointments(List<Appointment> appointments) {
         this.appointments = appointments;
     }
 }
